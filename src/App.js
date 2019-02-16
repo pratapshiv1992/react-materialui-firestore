@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = {
@@ -21,7 +22,7 @@ const styles = {
         marginRight: 20,
     },
     body:{
-        minHeight:'calc(100vh - 120px)',
+        minHeight:'calc(90vh - 120px)',
         minWidth:'100%',
     },
     footer:{
@@ -56,13 +57,25 @@ const ButtonAppBar = ({classes})=> {
 class App extends Component {
   render() {
       const { classes } = this.props;
-      console.log('-----',classes);
     return (
         <div className={classes.conatainer} >
             <ButtonAppBar classes={classes} />
             <div className= {classes.body} >
                 hjjh
             </div>
+            <TextField
+                id="standard-full-width"
+                label="Message"
+                autoFocus={true}
+                multiline={true}
+                placeholder="Type your message here..."
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+            />
 
                 <Button fullWidth={true} sizeLarge={true} variant="contained" color="secondary" >
                     send
