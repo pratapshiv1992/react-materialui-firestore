@@ -59,7 +59,7 @@ const ButtonAppBar = ({classes})=> {
                     <IconButton onClick={()=>alert('Menu clicked')} className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography onClick={()=>alert('Menu clicked')} variant="h6" color="inherit" className={classes.grow}>
+                    <Typography onClick={()=>alert('News clicked')} variant="h6" color="inherit" className={classes.grow}>
                         News
                     </Typography>
                     <Button  color="inherit" onClick={()=>alert('Home clicked')} >Home</Button>
@@ -72,6 +72,12 @@ const ButtonAppBar = ({classes})=> {
 class App extends Component {
     state ={
         message:"",
+        messagesList:null,
+    }
+
+
+    componentDidMount() {
+        this.showMessages()
     }
 
     handleMessage =(e)=>{
@@ -86,17 +92,30 @@ class App extends Component {
             .add({message:message});
     }
 
+    showMessages = () => {
+        app
+            .firestore()
+            .collection('messages')
+            .onSnapshot({ includeMetadataChanges: false }, snap => {
+                let messagesList = snap.docs.map(x =>({...x.data() }));
+                this.setState({messagesList})
+
+            })
+
+   }
+
   render() {
       const { classes } = this.props;
-      const {message} = this.state;
+      const {message,messagesList} = this.state;
     return (
         <div className={classes.conatainer} >
             <ButtonAppBar classes={classes} />
             <div className= {classes.body} >
-                <Typography classes={{root:classes.light}}  variant="h4" gutterBottom>
-                    Messages will  go here....
+                {(messagesList ||[{message:"No messages"}]).map((message,i)=>
+                <Typography key={i} classes={{root:classes.light}}  variant="h4" gutterBottom>
+                    {message.message}
                 </Typography>
-
+            )}
             </div>
 
             <TextField
