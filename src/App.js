@@ -55,8 +55,16 @@ const ButtonAppBar = ({classes})=> {
 }
 
 class App extends Component {
+    state ={
+        message:"",
+    }
+
+    handleMessage =(e)=>{
+        this.setState({[e.target.name]:e.target.value})
+    }
   render() {
       const { classes } = this.props;
+      const {message} = this.state;
     return (
         <div className={classes.conatainer} >
             <ButtonAppBar classes={classes} />
@@ -75,9 +83,12 @@ class App extends Component {
                     shrink: true,
                 }}
                 variant="outlined"
+                onChange={this.handleMessage}
+                value={message}
+                name="message"
             />
 
-                <Button fullWidth={true} sizeLarge={true} variant="contained" color="secondary" >
+                <Button fullWidth={true} variant="contained" color="secondary" >
                     send
                 </Button>
 
