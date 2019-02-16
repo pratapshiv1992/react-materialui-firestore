@@ -55,15 +55,15 @@ const ButtonAppBar = ({classes})=> {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                <Toolbar >
+                    <IconButton onClick={()=>alert('Menu clicked')} className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
+                    <Typography onClick={()=>alert('Menu clicked')} variant="h6" color="inherit" className={classes.grow}>
                         News
                     </Typography>
-                    <Button  color="inherit" >Home</Button>
-                </Toolbar>
+                    <Button  color="inherit" onClick={()=>alert('Home clicked')} >Home</Button>
+                </Toolbar  >
             </AppBar>
         </div>
     );
