@@ -11,10 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import * as firebase from 'firebase';
 
 const config = {
-    apiKey: "apiKey",
-    authDomain: "projectId.firebaseapp.com",
-    databaseURL: "https://databaseName.firebaseio.com",
-    storageBucket: "bucket.appspot.com"
+    apiKey: "apiKey",  // required
+    projectId: 'projectId', // required
+    authDomain: "projectId.firebaseapp.com", // optional
+    databaseURL: "https://databaseName.firebaseio.com", // optional
+    storageBucket: "bucket.appspot.com" // optional
 };
 
 const app = firebase.initializeApp(config);
@@ -89,16 +90,24 @@ class App extends Component {
             app
             .firestore()
             .collection('messages')
-            .add({message:message});
+            .add({
+                message:message,
+                createdAt:new Date(),
+            });
+            this.setState({
+            message:"",
+        })
     }
 
     showMessages = () => {
         app
             .firestore()
             .collection('messages')
+            .orderBy('createdAt', 'desc')
+            .limit(7)
             .onSnapshot({ includeMetadataChanges: false }, snap => {
                 let messagesList = snap.docs.map(x =>({...x.data() }));
-                this.setState({messagesList})
+                this.setState({messagesList:messagesList.reverse()})
 
             })
 
