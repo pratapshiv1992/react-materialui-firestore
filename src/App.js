@@ -8,7 +8,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import * as firebase from 'firebase';
 
+const config = {
+    apiKey: "apiKey",
+    authDomain: "projectId.firebaseapp.com",
+    databaseURL: "https://databaseName.firebaseio.com",
+    storageBucket: "bucket.appspot.com"
+};
+
+const app = firebase.initializeApp(config);
 
 const styles = {
     root: {
@@ -64,7 +73,11 @@ class App extends Component {
     }
 
     handleSend =(e)=>{
-        console.log('--send button pressed-----');
+        const {message} = this.state;
+            app
+            .firestore()
+            .collection('messages')
+            .add({message:message});
     }
 
   render() {
