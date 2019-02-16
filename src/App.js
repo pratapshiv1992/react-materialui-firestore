@@ -21,13 +21,16 @@ const styles = {
         marginRight: 20,
     },
     body:{
-        minHeight:'calc(100vh - 100px)',
+        minHeight:'calc(100vh - 120px)',
         minWidth:'100%',
     },
     footer:{
         minWidth: '100%',
         background: 'gray',
         minHeight:60,
+    },
+    conatainer:{
+        marginBottom:10
     }
 };
 
@@ -43,7 +46,7 @@ const ButtonAppBar = ({classes})=> {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button  color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
@@ -53,9 +56,18 @@ const ButtonAppBar = ({classes})=> {
 class App extends Component {
   render() {
       const { classes } = this.props;
+      console.log('-----',classes);
     return (
-        <div  >
+        <div className={classes.conatainer} >
             <ButtonAppBar classes={classes} />
+            <div className= {classes.body} >
+                hjjh
+            </div>
+
+                <Button fullWidth={true} sizeLarge={true} variant="contained" color="secondary" >
+                    send
+                </Button>
+
         </div>
     );
   }
