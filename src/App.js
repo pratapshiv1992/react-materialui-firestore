@@ -63,6 +63,9 @@ const ButtonAppBar = ({classes})=> {
                     <Typography onClick={()=>alert('News clicked')} variant="h6" color="inherit" className={classes.grow}>
                         News
                     </Typography>
+                    <Typography  variant="h6" color="inherit" className={classes.grow}>
+                        Chatting App
+                    </Typography>
                     <Button  color="inherit" onClick={()=>alert('Home clicked')} >Home</Button>
                 </Toolbar  >
             </AppBar>
@@ -87,16 +90,19 @@ class App extends Component {
 
     handleSend =(e)=>{
         const {message} = this.state;
+        if(message){
             app
-            .firestore()
-            .collection('messages')
-            .add({
-                message:message,
-                createdAt:new Date(),
-            });
+                .firestore()
+                .collection('messages')
+                .add({
+                    message:message,
+                    createdAt:new Date(),
+                });
             this.setState({
-            message:"",
-        })
+                message:"",
+            })
+        }
+
     }
 
     showMessages = () => {
@@ -149,6 +155,7 @@ class App extends Component {
                     variant="contained"
                     color="secondary"
                     onClick={this.handleSend}
+                    disabled={message ? false : true}
                 >
                     send
                 </Button>
