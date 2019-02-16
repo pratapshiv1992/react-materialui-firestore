@@ -31,7 +31,7 @@ const styles = {
         marginRight: 20,
     },
     body:{
-        minHeight:'calc(90vh - 120px)',
+        minHeight:'calc(85vh - 120px)',
         minWidth:'100%',
     },
     footer:{
@@ -41,7 +41,13 @@ const styles = {
     },
     conatainer:{
         marginBottom:10
-    }
+    },
+    light:{
+        marginTop: '30px',
+        background: '#f8f5f573',
+        color: '#932626',
+        textAlign: 'center',
+    },
 };
 
 
@@ -87,8 +93,12 @@ class App extends Component {
         <div className={classes.conatainer} >
             <ButtonAppBar classes={classes} />
             <div className= {classes.body} >
-                hjjh
+                <Typography classes={{root:classes.light}}  variant="h4" gutterBottom>
+                    Messages will  go here....
+                </Typography>
+
             </div>
+
             <TextField
                 id="standard-full-width"
                 label="Message"
