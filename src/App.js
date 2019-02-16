@@ -47,7 +47,7 @@ const ButtonAppBar = ({classes})=> {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         News
                     </Typography>
-                    <Button  color="inherit">Login</Button>
+                    <Button  color="inherit" >Home</Button>
                 </Toolbar>
             </AppBar>
         </div>
@@ -62,6 +62,11 @@ class App extends Component {
     handleMessage =(e)=>{
         this.setState({[e.target.name]:e.target.value})
     }
+
+    handleSend =(e)=>{
+        console.log('--send button pressed-----');
+    }
+
   render() {
       const { classes } = this.props;
       const {message} = this.state;
@@ -88,7 +93,12 @@ class App extends Component {
                 name="message"
             />
 
-                <Button fullWidth={true} variant="contained" color="secondary" >
+                <Button
+                    fullWidth={true}
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.handleSend}
+                >
                     send
                 </Button>
 
